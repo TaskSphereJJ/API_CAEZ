@@ -1,11 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTurnoDto } from './dto/create-turno.dto';
 import { UpdateTurnoDto } from './dto/update-turno.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Turno } from './entities/turno.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TurnoService {
-  create(createTurnoDto: CreateTurnoDto) {
-    return 'This action adds a new turno';
+  constructor(
+    @InjectRepository(Turno) private readonly turnoRepository: Repository<Turno>
+  ){}
+
+  // Metodo crear
+  async create(createTurnoDto: CreateTurnoDto) {
+    try {
+      // Creacion de turno
+      const turno = await this.turnoRepository.create(createTurnoDto)
+      // Lo guardo en la base de datos
+      await this.turnoRepository.save(turno)
+
+      // Mensaje de exito al crear un turno con estado 201 de recien creado
+      return {
+        ok: true,
+        message: 'Turno creado con exito',
+        status: 201,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500
+      }
+    }
   }
 
   findAll() {
