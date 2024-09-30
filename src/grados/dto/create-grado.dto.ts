@@ -1,1 +1,2 @@
-export class CreateGradoDto {}
+export class CreateGradoDto {
+}

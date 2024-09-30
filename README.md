@@ -31,3 +31,9 @@ $ npm run test:cov
 ```
 
 
+
+## Ejecutar lo de docker
+
+```bash
+# En la terminal, ejecuta el siguiente comando para construir y levantar los servicios
+$ docker-compose up --build

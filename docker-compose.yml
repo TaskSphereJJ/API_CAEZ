@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000" # Expone el puerto 3000 en el host
+    environment:
+      - PORT=3000
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=jeffrey
+      - DB_PASSWORD=jeffrey20068f
+      - DB_NAME=CAEZ_API
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - caez-network
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    ports:
+      - "3306:3306" # Expone el puerto 3306 para la base de datos
+    environment:
+      - MYSQL_ROOT_PASSWORD=jeffrey20068f
+      - MYSQL_DATABASE=CAEZ_API
+      - MYSQL_USER=jeffrey
+      - MYSQL_PASSWORD=jeffrey20068f
+    volumes:
+      - db-data:/var/lib/mysql # Persistencia de los datos de MySQL
+    networks:
+      - caez-network
+
+networks:
+  caez-network:
+    driver: bridge
+
+volumes:
+  db-data:
