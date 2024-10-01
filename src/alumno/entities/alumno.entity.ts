@@ -3,7 +3,6 @@ import { Enfermedad } from "src/enfermedad/entities/enfermedad.entity";
 import { Padrino } from "src/padrino/entities/padrino.entity";
 import { Role } from "src/roles/entities/role.entity";
 import { Sexo } from "src/sexo/entities/sexo.entity";
-import { TipoDocumento } from "src/tipo-documento/entities/tipo-documento.entity";
 import { Turno } from "src/turno/entities/turno.entity";
 import { User } from "src/users/entities/user.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
@@ -40,8 +39,8 @@ export class Alumno {
     @ManyToOne(() => Enfermedad)
     enfermedadId: Enfermedad;
 
-    @ManyToOne(() => TipoDocumento)
-    tipoDocumentoId: TipoDocumento;
+    // @ManyToOne(() => TipoDocumento)
+    // tipoDocumentoId: TipoDocumento;
 
     @ManyToOne(() => Turno)
     turnoId: Turno;
