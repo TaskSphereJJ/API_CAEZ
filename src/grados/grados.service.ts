@@ -1,11 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import { CreateGradoDto } from './dto/create-grado.dto';
 import { UpdateGradoDto } from './dto/update-grado.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Grado } from './entities/grado.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class GradosService {
-  create(createGradoDto: CreateGradoDto) {
-    return 'This action adds a new grado';
+  constructor(
+    @InjectRepository(Grado) private readonly gradoRepository: Repository<Grado>
+  ){}
+
+  // Metodo crear grado
+  async create(createGradoDto: CreateGradoDto) {
+    try {
+      // Creacion de grado
+      const grado = await this.gradoRepository.create(createGradoDto);
+      
+      // Guardo el grado en la base de datos
+      await this.gradoRepository.save(grado);
+
+      // Mensaje de exito al crear el creado con estado 201
+      return {
+        ok: true,
+        message: 'Grado creado con exito',
+        status: 201,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   findAll() {
