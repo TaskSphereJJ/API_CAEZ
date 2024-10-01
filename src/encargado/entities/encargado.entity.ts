@@ -3,7 +3,6 @@ import { Sexo } from "src/sexo/entities/sexo.entity";
 import { BeforeInsert, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import * as bcrypt from 'bcrypt';
 import { Direccion } from "src/direccion/entities/direccion.entity";
-import { TipoDocumento } from "src/tipo-documento/entities/tipo-documento.entity";
 import { User } from "src/users/entities/user.entity";
 
 @Entity('encargado')
@@ -44,8 +43,8 @@ export class Encargado {
     @ManyToOne(() => Direccion) 
     direccionId: Direccion;
 
-    @ManyToOne(() => TipoDocumento)
-    tipoDocumentoId: TipoDocumento;
+    // @ManyToOne(() => TipoDocumento)
+    // tipoDocumentoId: TipoDocumento;
 
     // usuario con rol tipo Administrador
     @ManyToOne(() => User)
