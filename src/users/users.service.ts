@@ -11,18 +11,18 @@ export class UsersService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     @InjectRepository(Role) private readonly roleRepository: Repository<Role>,
-  ){}
+  ) { }
 
   // Metodo crear usuario
   async create(createUserDto: CreateUserDto) {
     try {
       // Busco el rol asociado a usuario
       const role = await this.roleRepository.findOne({
-        where:{ id: createUserDto.roleId }
+        where: { id: createUserDto.roleId }
       })
 
       // Verifico si rol es diferente de null
-      if(!role){
+      if (!role) {
         return {
           ok: false,
           message: 'rol no encontrado',
@@ -34,10 +34,10 @@ export class UsersService {
       const user = new User();
 
       // Asigno los datos del DTO a la entidad usuario
-      user.name       = createUserDto.name;
-      user.lastName   = createUserDto.lastName;
-      user.email      = createUserDto.email;
-      user.password   = createUserDto.password;
+      user.name = createUserDto.name;
+      user.lastName = createUserDto.lastName;
+      user.email = createUserDto.email;
+      user.password = createUserDto.password;
       user.registrationDate = createUserDto.registrationDate || new Date();
       user.roleId = role;
 
@@ -65,16 +65,68 @@ export class UsersService {
     }
   }
 
-  findAll() {
-    return `This action returns all users`;
+  // Metodo obtener todos los usuarios
+  async findAll() {
+    try {
+      // Verifico si esta activo
+      const user = await this.userRepository.find({ where: { isActive: true } });
+
+      // Verifico si la longitud es mayor a cero
+      if (user.length > 0) {
+        // Si es mayor a cero devuelvo los usuarios con estado 200
+        return { ok: true, user, status: 200 };
+      }
+
+      // Si no se encontro nada retornar false con mensaje de error y estado 204
+      return {
+        ok: false,
+        message: 'No se encontraron usuarios',
+        status: 204
+      }
+
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  // Metodo para buscar un usuario en especifico
+  async findOne(id: number) {
+    try {
+      // Busco al usuario por medio del id
+      const user = await this.userRepository.findOne({where: { id }});
+
+      // Verifico si user es diferente a null
+      if(!user){
+        // Mensaje de error de que no se encontro el usuario con estado 404
+        return {ok: false, message: 'No se encontro el usuario', status: 404}
+      }
+
+      // Si se el usuario si se encontro devolver el usuario con estado 200
+      return {
+        ok: true,
+        user,
+        status: 200,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  // Metodo para modificar usuario
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    try {
+      
+    } catch (error) {
+      
+    }
   }
 
   remove(id: number) {
