@@ -129,7 +129,12 @@ export class UsersService {
     }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  // Metodo para eliminar un user
+  async remove(id: number) {
+    try {
+      
+    } catch (error) {
+      
+    }
   }
 }
