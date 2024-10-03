@@ -37,18 +37,22 @@ export class DireccionService {
     }
   }
 
+  // Metodo encontrar todo
   findAll() {
     return `This action returns all direccion`;
   }
 
+  // Metodo buscar uno
   findOne(id: number) {
     return `This action returns a #${id} direccion`;
   }
 
+  // Metodo modificar
   update(id: number, updateDireccionDto: UpdateDireccionDto) {
     return `This action updates a #${id} direccion`;
   }
 
+  // Metodo eliminar
   remove(id: number) {
     return `This action removes a #${id} direccion`;
   }
