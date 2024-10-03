@@ -13,23 +13,27 @@ export class EncargadoService {
     @InjectRepository(Sexo) private readonly sexoReposiory: Repository<Sexo>,
   ){}
 
-
+// Metodo crear encargado
   create(createEncargadoDto: CreateEncargadoDto) {
     return 'This action adds a new encargado';
   }
 
+  // Metodo para obtener todos los encargados
   findAll() {
     return `This action returns all encargado`;
   }
 
+  // Metodo para buscar a un encargado por su id
   findOne(id: number) {
     return `This action returns a #${id} encargado`;
   }
 
+  // Metodo para modificar un encargado
   update(id: number, updateEncargadoDto: UpdateEncargadoDto) {
     return `This action updates a #${id} encargado`;
   }
 
+  // Metodo para eliminar un encargado
   remove(id: number) {
     return `This action removes a #${id} encargado`;
   }
