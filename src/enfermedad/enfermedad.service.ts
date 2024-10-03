@@ -31,18 +31,22 @@ export class EnfermedadService {
     }
   }
 
+  // Metodo para obtenr todas las enfermedades
   findAll() {
     return `This action returns all enfermedad`;
   }
 
+  // Metodo para buscar una enfermedad en especifico por su id
   findOne(id: number) {
     return `This action returns a #${id} enfermedad`;
   }
 
+  // Metodo para modificar una enfermedad
   update(id: number, updateEnfermedadDto: UpdateEnfermedadDto) {
     return `This action updates a #${id} enfermedad`;
   }
 
+  // Metodo para eliminar una enfermedad
   remove(id: number) {
     return `This action removes a #${id} enfermedad`;
   }
