@@ -35,18 +35,22 @@ export class GradosService {
     }
   }
 
+  // Obtener todos los grados
   findAll() {
     return `This action returns all grados`;
   }
 
+  // Obtener un grado por su id
   findOne(id: number) {
     return `This action returns a #${id} grado`;
   }
 
+  // Modificar grado
   update(id: number, updateGradoDto: UpdateGradoDto) {
     return `This action updates a #${id} grado`;
   }
 
+  // Eliminar grado
   remove(id: number) {
     return `This action removes a #${id} grado`;
   }
