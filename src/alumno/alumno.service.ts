@@ -4,14 +4,19 @@ import { UpdateAlumnoDto } from './dto/update-alumno.dto';
 
 @Injectable()
 export class AlumnoService {
+
+
+  // Metodo para crear alumno
   create(createAlumnoDto: CreateAlumnoDto) {
     return 'This action adds a new alumno';
   }
 
+  // Meotdo para buscar todos los alumnos
   findAll() {
     return `This action returns all alumno`;
   }
 
+  // Metodo para buscar un alumno
   findOne(id: number) {
     return `This action returns a #${id} alumno`;
   }
