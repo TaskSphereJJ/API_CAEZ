@@ -35,18 +35,22 @@ export class MesService {
     }
   }
 
+  // Obtener todos los meses
   findAll() {
     return `This action returns all mes`;
   }
 
+  // Obtener un mes por su id
   findOne(id: number) {
     return `This action returns a #${id} me`;
   }
 
+  // Modificar un mes
   update(id: number, updateMeDto: UpdateMeDto) {
     return `This action updates a #${id} me`;
   }
 
+  // Eliminar un mes
   remove(id: number) {
     return `This action removes a #${id} me`;
   }
