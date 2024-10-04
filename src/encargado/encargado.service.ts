@@ -28,7 +28,7 @@ export class EncargadoService {
     return `This action returns a #${id} encargado`;
   }
 
-  // Metodo para modificar un encargado
+  // Metodo para modificar un encargado.
   update(id: number, updateEncargadoDto: UpdateEncargadoDto) {
     return `This action updates a #${id} encargado`;
   }
