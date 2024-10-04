@@ -45,7 +45,7 @@ export class MesService {
     return `This action returns a #${id} me`;
   }
 
-  // Modificar un mes
+  // Modificar un mes.
   update(id: number, updateMeDto: UpdateMeDto) {
     return `This action updates a #${id} me`;
   }
