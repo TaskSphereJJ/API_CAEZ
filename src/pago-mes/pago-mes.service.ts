@@ -4,6 +4,9 @@ import { UpdatePagoMeDto } from './dto/update-pago-me.dto';
 
 @Injectable()
 export class PagoMesService {
+
+
+  // Crear pago mes
   create(createPagoMeDto: CreatePagoMeDto) {
     return 'This action adds a new pagoMe';
   }
