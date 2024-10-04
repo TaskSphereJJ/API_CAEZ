@@ -21,6 +21,7 @@ export class AlumnoService {
     return `This action returns a #${id} alumno`;
   }
 
+  // Modificar alumno
   update(id: number, updateAlumnoDto: UpdateAlumnoDto) {
     return `This action updates a #${id} alumno`;
   }
