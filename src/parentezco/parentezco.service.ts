@@ -49,6 +49,7 @@ export class ParentezcoService {
     return `This action updates a #${id} parentezco`;
   }
 
+  // Eliminar parentezco
   remove(id: number) {
     return `This action removes a #${id} parentezco`;
   }
