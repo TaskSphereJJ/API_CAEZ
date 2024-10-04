@@ -52,7 +52,7 @@ export class DireccionService {
     return `This action updates a #${id} direccion`;
   }
 
-  // Metodo eliminar
+  // Metodo eliminar.
   remove(id: number) {
     return `This action removes a #${id} direccion`;
   }
