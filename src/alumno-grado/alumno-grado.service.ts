@@ -27,7 +27,7 @@ export class AlumnoGradoService {
     return `This action updates a #${id} alumnoGrado`;
   }
 
-  // Metodo eliminar
+  // Metodo eliminar.
   remove(id: number) {
     return `This action removes a #${id} alumnoGrado`;
   }
