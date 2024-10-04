@@ -21,7 +21,7 @@ export class FacturaService {
     return `This action returns a #${id} factura`;
   }
 
-  // Modificar factura
+  // Modificar factura.
   update(id: number, updateFacturaDto: UpdateFacturaDto) {
     return `This action updates a #${id} factura`;
   }
