@@ -21,7 +21,7 @@ export class InformacionFinancieraService {
     return `This action returns a #${id} informacionFinanciera`;
   }
 
-  // Modificar info-financiera por su id
+  // Modificar info-financiera por su id.
   update(id: number, updateInformacionFinancieraDto: UpdateInformacionFinancieraDto) {
     return `This action updates a #${id} informacionFinanciera`;
   }
