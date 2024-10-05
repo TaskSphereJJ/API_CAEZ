@@ -11,7 +11,7 @@ export class GradosService {
     @InjectRepository(Grado) private readonly gradoRepository: Repository<Grado>
   ){}
 
-  // Metodo crear grado
+  // Crear grado
   async create(createGradoDto: CreateGradoDto) {
     try {
       // Creacion de grado
