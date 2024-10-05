@@ -45,6 +45,7 @@ export class ParentezcoService {
     return `This action returns a #${id} parentezco`;
   }
 
+  // Modificar perentezco
   update(id: number, updateParentezcoDto: UpdateParentezcoDto) {
     return `This action updates a #${id} parentezco`;
   }
