@@ -34,6 +34,8 @@ export class TipoPagoService {
       };
     }
   }
+
+  // Obtener todos los tipo pago
   findAll() {
     return `This action returns all tipoPago`;
   }
