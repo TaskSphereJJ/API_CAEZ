@@ -65,7 +65,7 @@ export class UsersService {
     }
   }
 
-  // Metodo obtener todos los usuarios
+  // Obtener todos los usuarios
   async findAll() {
     try {
       // Verifico si esta activo
