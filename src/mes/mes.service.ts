@@ -50,7 +50,7 @@ export class MesService {
     return `This action updates a #${id} me`;
   }
 
-  // Eliminar un mes
+  // Eliminar un mes.
   remove(id: number) {
     return `This action removes a #${id} me`;
   }
