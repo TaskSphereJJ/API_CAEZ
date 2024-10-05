@@ -4,7 +4,7 @@ import { UpdatePadrinoDto } from './dto/update-padrino.dto';
 
 @Injectable()
 export class PadrinoService {
-
+  constructor() { }
 
   // Crear padrino
   create(createPadrinoDto: CreatePadrinoDto) {
