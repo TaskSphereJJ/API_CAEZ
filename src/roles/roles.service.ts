@@ -35,6 +35,7 @@ try {
 }
   }
 
+  // Obtener todos los roles
   async findAll() {
     try {
       const role = await this.roleRepository.find(
