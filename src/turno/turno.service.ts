@@ -34,6 +34,7 @@ export class TurnoService {
     }
   }
 
+  // Obtener todos los turnos
   findAll() {
     return `This action returns all turno`;
   }
