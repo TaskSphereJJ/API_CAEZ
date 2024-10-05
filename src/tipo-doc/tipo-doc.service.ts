@@ -35,6 +35,7 @@ export class TipoDocService {
     }
   }
 
+  // Obtener todos los tipo documentos
   findAll() {
     return `This action returns all tipoDoc`;
   }
