@@ -4,7 +4,7 @@ import { UpdatePagoDto } from './dto/update-pago.dto';
 
 @Injectable()
 export class PagoService {
-
+  constructor(){}
 
 
   // Crear pago
