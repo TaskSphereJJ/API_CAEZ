@@ -41,7 +41,7 @@ export class EnfermedadService {
     return `This action returns a #${id} enfermedad`;
   }
 
-  // Metodo para modificar una enfermedad.
+  // Modificar una enfermedad.
   update(id: number, updateEnfermedadDto: UpdateEnfermedadDto) {
     return `This action updates a #${id} enfermedad`;
   }
