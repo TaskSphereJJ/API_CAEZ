@@ -37,6 +37,7 @@ export class ParentezcoService {
     }
   }
 
+  // Obtener todos los parentezcos
   findAll() {
     return `This action returns all parentezco`;
   }
