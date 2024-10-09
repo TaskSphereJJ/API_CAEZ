@@ -22,7 +22,7 @@ export class PagoService {
     return `This action returns a #${id} pago`;
   }
 
-  // Modificar un pago
+  // Modificar un pago.
   update(id: number, updatePagoDto: UpdatePagoDto) {
     return `This action updates a #${id} pago`;
   }
