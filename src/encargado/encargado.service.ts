@@ -33,7 +33,7 @@ export class EncargadoService {
     return `This action updates a #${id} encargado`;
   }
 
-  // Metodo para eliminar un encargado
+  // Eliminar un encargado
   remove(id: number) {
     return `This action removes a #${id} encargado`;
   }
