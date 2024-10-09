@@ -26,6 +26,7 @@ export class AlumnoService {
     return `This action updates a #${id} alumno`;
   }
 
+  // Eliminar alumno
   remove(id: number) {
     return `This action removes a #${id} alumno`;
   }
