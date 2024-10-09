@@ -34,7 +34,7 @@ import { TipoPagoModule } from './tipo-pago/tipo-pago.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       logging: true,
-      synchronize: true,
+      synchronize: false,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
     RolesModule,
@@ -60,4 +60,4 @@ import { TipoPagoModule } from './tipo-pago/tipo-pago.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
