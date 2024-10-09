@@ -4,7 +4,7 @@ import { UpdateAlumnoGradoDto } from './dto/update-alumno-grado.dto';
 
 @Injectable()
 export class AlumnoGradoService {
-
+  constructor(){}
 
 
   // Metodo crear
