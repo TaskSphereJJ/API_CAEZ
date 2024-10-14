@@ -20,7 +20,7 @@ export class GradosService {
       // Guardo el grado en la base de datos
       await this.gradoRepository.save(grado);
 
-      // Mensaje de exito al crear el creado con estado 201
+      // Mensaje de exito al crear el creado con estado 201 de recien creado
       return {
         ok: true,
         message: 'Grado creado con exito',
