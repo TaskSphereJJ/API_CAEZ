@@ -11,7 +11,7 @@ export class EnfermedadService {
     @InjectRepository(Enfermedad) private readonly enfermedadRepository: Repository<Enfermedad>
   ){}
 
-  // Metodo crear
+  // Crear enfermedad
   async create(createEnfermedadDto: CreateEnfermedadDto) {
     try {
       // Creacion de enfermedad
@@ -31,7 +31,7 @@ export class EnfermedadService {
     }
   }
 
-  // Metodo para obtenr todas las enfermedades
+  // Obtenr todas las enfermedades
   findAll() {
     return `This action returns all enfermedad`;
   }
