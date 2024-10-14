@@ -16,7 +16,7 @@ export class AlumnoService {
     return `This action returns all alumno`;
   }
 
-  // Metodo para buscar un alumno
+  // Buscar un alumno por id
   findOne(id: number) {
     return `This action returns a #${id} alumno`;
   }
