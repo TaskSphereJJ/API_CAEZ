@@ -38,6 +38,7 @@ try {
   // Obtener todos los roles
   async findAll() {
     try {
+      // Busco los roles por estado activo
       const role = await this.roleRepository.find(
         {
           where: { isActive: true },
