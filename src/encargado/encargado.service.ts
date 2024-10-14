@@ -23,12 +23,12 @@ export class EncargadoService {
     return `This action returns all encargado`;
   }
 
-  // Metodo para buscar a un encargado por su id
+  // Buscar a un encargado por su id
   findOne(id: number) {
     return `This action returns a #${id} encargado`;
   }
 
-  // Metodo para modificar un encargado.
+  // Modificar un encargado.
   update(id: number, updateEncargadoDto: UpdateEncargadoDto) {
     return `This action updates a #${id} encargado`;
   }
