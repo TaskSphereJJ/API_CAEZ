@@ -11,7 +11,7 @@ export class TurnoService {
     @InjectRepository(Turno) private readonly turnoRepository: Repository<Turno>
   ){}
 
-  // Metodo crear
+  // Crear turno
   async create(createTurnoDto: CreateTurnoDto) {
     try {
       // Creacion de turno
