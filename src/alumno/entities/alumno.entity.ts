@@ -49,7 +49,7 @@ export class Alumno {
     administradorId: User;
 
     @ManyToOne(() => Padrino)
-    padrino: Padrino;
+    padrinoId: Padrino;
 
     @Column({ default: true })
     isActive: boolean;
