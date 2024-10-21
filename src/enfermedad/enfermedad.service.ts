@@ -14,7 +14,7 @@ export class EnfermedadService {
   // Crear enfermedad
   async create(createEnfermedadDto: CreateEnfermedadDto) {
     try {
-      // Creacion de enfermedad
+      // Creacion de enfermedad por medio del Dto
       const enfermedad = await this.enfermedadRepository.create(createEnfermedadDto)
 
       // Guardo la enfermedad en la base de datos
