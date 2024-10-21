@@ -45,9 +45,9 @@ export class CreateEncargadoDto {
     @IsNumber()
     direccionId: number;
 
-    @IsNotEmpty()
-    @IsNumber()
-    tipoDocumentoId: number;
+    // @IsNotEmpty()
+    // @IsNumber()
+    // tipoDocumentoId: number;
 
     @IsNotEmpty()
     @IsNumber()
