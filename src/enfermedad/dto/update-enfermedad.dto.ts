@@ -1,4 +1,11 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateEnfermedadDto } from './create-enfermedad.dto';
+import { IsNotEmpty, IsString } from "class-validator";
 
-export class UpdateEnfermedadDto extends PartialType(CreateEnfermedadDto) {}
+export class UpdateEnfermedadDto {
+    @IsNotEmpty()
+    @IsString()
+    name: string;
+
+    @IsNotEmpty()
+    @IsString()
+    descripcion: string;
+}
