@@ -11,6 +11,7 @@ export class FacturaService {
     @InjectRepository(Factura) private readonly facturaRepository: Repository<Factura>,
   ) { }
 
+  // DESDE ACA FALTA METODO CREAR
   // Crear factura
   create(createFacturaDto: CreateFacturaDto) {
     return 'This action adds a new factura';
