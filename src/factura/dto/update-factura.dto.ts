@@ -1,4 +1,15 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateFacturaDto } from './create-factura.dto';
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
-export class UpdateFacturaDto extends PartialType(CreateFacturaDto) {}
+export class UpdateFacturaDto {
+    @IsNotEmpty()
+    @IsNumber()
+    pagoId: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    alumnoId: number;
+
+    @IsNotEmpty()
+    @IsString()
+    pdfRoute: string;
+}
