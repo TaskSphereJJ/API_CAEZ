@@ -1,4 +1,19 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateInformacionFinancieraDto } from './create-informacion-financiera.dto';
+import { IsDecimal, IsNotEmpty, IsNumber } from "class-validator";
 
-export class UpdateInformacionFinancieraDto extends PartialType(CreateInformacionFinancieraDto) {}
+export class UpdateInformacionFinancieraDto {
+    @IsNotEmpty()
+    @IsNumber()
+    fondoActual: number;
+
+    @IsNotEmpty()
+    @IsDecimal()
+    deudaTotal: number;
+
+    @IsNotEmpty()
+    @IsDecimal()
+    salgoPorCompletar: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    numStudent: number;
+}
