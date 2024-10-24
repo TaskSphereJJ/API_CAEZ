@@ -1,15 +1,40 @@
 import { Injectable } from '@nestjs/common';
 import { CreateInformacionFinancieraDto } from './dto/create-informacion-financiera.dto';
 import { UpdateInformacionFinancieraDto } from './dto/update-informacion-financiera.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { InformacionFinanciera } from './entities/informacion-financiera.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class InformacionFinancieraService {
-
+  constructor(
+    @InjectRepository(InformacionFinanciera)private readonly infoFinancieraRepository: Repository<InformacionFinanciera>,
+  ){}
 
   // Crear info-financiera
-  create(createInformacionFinancieraDto: CreateInformacionFinancieraDto) {
-    return 'This action adds a new informacionFinanciera';
-  }
+  async create(createInformacionFinancieraDto: CreateInformacionFinancieraDto) {
+try {
+      // Creacion de IF
+      const IF = await this.infoFinancieraRepository.create(createInformacionFinancieraDto);
+  
+      // Guardo el resultado en la base 
+      await this.infoFinancieraRepository.save(IF);
+  
+      // Mensaje de exito al guardar
+      return {
+        ok: true,
+        message: 'Informacion Financiera creada con exito',
+        status: 201,
+      };
+  
+} catch (error) {
+  return {
+    ok: false,
+    message: error.message,
+    status: 500,
+  };
+}    
+    }
 
   // Obtener toda la info-financiera
   findAll() {
