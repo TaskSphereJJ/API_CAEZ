@@ -4,14 +4,17 @@ import { UpdateFacturaDto } from './dto/update-factura.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Factura } from './entities/factura.entity';
 import { Repository } from 'typeorm';
+import { Pago } from 'src/pago/entities/pago.entity';
+import { Alumno } from 'src/alumno/entities/alumno.entity';
 
 @Injectable()
 export class FacturaService {
   constructor(
     @InjectRepository(Factura) private readonly facturaRepository: Repository<Factura>,
+    @InjectRepository(Pago) private readonly pagoRepository: Repository<Pago>,
+    @InjectRepository(Alumno) private readonly alumnoRepository: Repository<Alumno>,
   ) { }
 
-  // DESDE ACA FALTA METODO CREAR
   // Crear factura
   async create(createFacturaDto: CreateFacturaDto) {
     try {
