@@ -162,9 +162,35 @@ export class AlumnoService {
     }
   }
 
-  // Meotdo para buscar todos los alumnos
-  findAll() {
-    return `This action returns all alumno`;
+  // Obtener todos los alumnos
+  async findAll() {
+    try {
+      // Verifico si estan activos
+      const alumnos = await this.alumnoRespository.find({ where: { isActive: true } });
+
+      // Verifico si la longitud es mayor a cero
+      // Si se cumple devolver los alumnos
+      if (alumnos.length > 0) {
+        return {
+          ok: true,
+          alumnos,
+          status: 200,
+        };
+      }
+
+      // En el caso de que no se encuentre ninguno retornar error
+      return {
+        ok: false,
+        message: 'Alumnos no encontrados',
+        status: 204,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   // Buscar un alumno por id
