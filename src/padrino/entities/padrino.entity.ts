@@ -36,4 +36,7 @@ export class Padrino {
     @ManyToOne(() => User)
     administrador: User;
 
+    @Column({default: true})
+    isActive: boolean;
+
 }
