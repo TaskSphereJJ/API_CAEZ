@@ -1,4 +1,11 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreatePagoMeDto } from './create-pago-me.dto';
+import { IsNotEmpty, IsNumber } from "class-validator";
 
-export class UpdatePagoMeDto extends PartialType(CreatePagoMeDto) {}
+export class UpdatePagoMeDto {
+    @IsNotEmpty()
+    @IsNumber()
+    pagoId: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    mesId: number;
+}
