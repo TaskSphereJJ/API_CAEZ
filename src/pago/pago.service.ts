@@ -14,7 +14,7 @@ export class PagoService {
     @InjectRepository(Pago)private readonly pagoReposiroy: Repository<Pago>,
     @InjectRepository(Alumno)private readonly alumnoRepository: Repository<Alumno>,
     @InjectRepository(TipoPago)private readonly tipoPagoRepository: Repository<TipoPago>,
-    @InjectRepository(User)private readonly userRepository: Repository<User>
+    @InjectRepository(User)private readonly userRepository: Repository<User>,
   ){}
 
 
