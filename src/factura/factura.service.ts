@@ -19,7 +19,6 @@ export class FacturaService {
   async create(createFacturaDto: CreateFacturaDto) {
     try {
       // Verifico que exista pago por medio del Id
-      // Verificar Id
       const pago = await this.pagoRepository.findOne({
         where: {Id: createFacturaDto.pagoId }
       });
