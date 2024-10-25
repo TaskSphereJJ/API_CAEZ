@@ -36,7 +36,7 @@ export class EnfermedadService {
     return `This action returns all enfermedad`;
   }
 
-  // Metodo para buscar una enfermedad en especifico por su id
+  // Obtener una enfermedad en especifico por su id
   findOne(id: number) {
     return `This action returns a #${id} enfermedad`;
   }
