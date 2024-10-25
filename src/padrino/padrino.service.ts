@@ -16,7 +16,7 @@ export class PadrinoService {
     @InjectRepository(Role)private readonly roleRepository: Repository<Role>,
     @InjectRepository(Sexo)private readonly sexoRepository: Repository<Sexo>,
     @InjectRepository(Direccion)private readonly direccionRepository: Repository<Direccion>,
-    @InjectRepository(User)private readonly userRepository: Repository<User>,
+    @InjectRepository(User)private readonly userRepository: Repository<User>
   ) { }
 
   // Crear padrino
