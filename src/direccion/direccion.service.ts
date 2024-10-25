@@ -12,7 +12,7 @@ export class DireccionService {
   ){}
 
 
-  // Metod crear
+  // Metodo crear
   async create(createDireccionDto: CreateDireccionDto) {
     try {
       // Crear una direccion
