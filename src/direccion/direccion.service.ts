@@ -37,9 +37,36 @@ export class DireccionService {
     }
   }
 
-  // Metodo encontrar todo
-  findAll() {
-    return `This action returns all direccion`;
+  // Obtener toodas las direcciones
+  async findAll() {
+    try {
+      // Verifico si existen las direcciones por medio del estado activo
+      const direction = await this.direccionRepository.find({
+        where: { isActive: true}
+      })
+
+      // Verifico si las direcciones son mayor a cero
+      if(direction.length > 0){
+        return {
+          oK: true,
+          direction,
+          status: 200,
+        };
+      }
+
+      // En caso que no se encuentren muestro un mensaje de error
+      return {
+        oK: false,
+        message: 'No se encontraron direcciones',
+        status: 204,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   // Metodo buscar uno
