@@ -1,4 +1,7 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateParentezcoDto } from './create-parentezco.dto';
+import { IsNotEmpty, IsString } from "class-validator";
 
-export class UpdateParentezcoDto extends PartialType(CreateParentezcoDto) {}
+export class UpdateParentezcoDto {
+    @IsNotEmpty()
+    @IsString()
+    name: string;
+}
