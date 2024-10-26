@@ -131,9 +131,37 @@ export class EncargadoService {
     }
   }
 
-  // Metodo para obtener todos los encargados
-  findAll() {
-    return `This action returns all encargado`;
+  // Obtener todos los encargados
+  async findAll() {
+    try {
+      // Verifico si estan activos
+      const encargado = await this.encargadoReposiory.find({
+        where: { isActive: true }
+      });
+
+      // Verifico si la longitud es mayor a cero
+      if (encargado.length > 0) {
+        return {
+          ok: true,
+          encargado,
+          status: 200,
+        };
+      }
+
+      // Si no se encuentran encargados mostrar mensaje de error
+      return {
+        ok: false,
+        message: 'No se encontraron encargados',
+        status: 204,
+      };
+
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   // Buscar a un encargado por su id
