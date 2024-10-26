@@ -32,8 +32,36 @@ export class EnfermedadService {
   }
 
   // Obtenr todas las enfermedades
-  findAll() {
-    return `This action returns all enfermedad`;
+  async findAll() {
+    try {
+      // Verifico si estan activas
+      const enfermedad = await this.enfermedadRepository.find({
+        where: {isActive: true}
+      });
+
+      // Verifico si la longitud es mayor a 0
+      if(enfermedad.length > 0) {
+        return {
+          ok: true,
+          enfermedad,
+          status: 200,
+        };
+      }
+
+      // En caso de que no se encuentren enfermedades
+      return {
+        ok: false,
+        message: 'No se encontraron enfermedades',
+        status: 204,
+      };
+
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   // Obtener una enfermedad en especifico por su id
