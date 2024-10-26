@@ -1,4 +1,7 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateDireccionDto } from './create-direccion.dto';
+import { IsNotEmpty, IsString } from 'class-validator';
 
-export class UpdateDireccionDto extends PartialType(CreateDireccionDto) {}
+export class UpdateDireccionDto {
+    @IsNotEmpty()
+    @IsString()
+    name: string;
+}
