@@ -13,8 +13,58 @@ export class FacturaService {
 
   // DESDE ACA FALTA METODO CREAR
   // Crear factura
-  create(createFacturaDto: CreateFacturaDto) {
-    return 'This action adds a new factura';
+  async create(createFacturaDto: CreateFacturaDto) {
+    try {
+      // Verifico que exista pago por medio del Id
+      // Verificar Id
+      const pago = await this.pagoRepository.findOne({
+        where: {Id: createFacturaDto.pagoId }
+      });
+
+      // Verifico si la respuesta es nula
+      if (!pago) {
+        return {
+          ok: false,
+          message: 'Pago no encontrado',
+          status: 404,
+        };
+      }
+
+      // Verifico que exista alumno por medio del id
+      const alumno = await this.alumnoRepository.findOne({
+        where: { id: createFacturaDto.alumnoId }
+      });
+
+      // Verifico si alumno es nulo
+      if (!alumno) {
+        return {
+          ok: false,
+          message: 'Alumno no encontrado',
+          status: 404,
+        };
+      }
+
+      // Instancia del modelo de factura
+      const factura = new Factura();
+      factura.pdfRoute = createFacturaDto.pdfRoute;
+
+      // Guardo el resultado en la base 
+      await this.facturaRepository.save(factura);
+
+      // Mensaje de exito al crear la factura
+      return {
+        ok: true,
+        message: 'Factura creada con exito',
+        status: 201,
+      };
+
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   // Obtener todas las facturas
