@@ -1,4 +1,38 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreatePadrinoDto } from './create-padrino.dto';
+import { IsDate, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
-export class UpdatePadrinoDto extends PartialType(CreatePadrinoDto) {}
+export class UpdatePadrinoDto {
+    @IsNotEmpty()
+    @IsString()
+    name: string;
+
+    @IsNotEmpty()
+    @IsString()
+    lastName: string;
+
+    @IsNotEmpty()
+    phone: number;
+
+    @IsNotEmpty()
+    @IsString()
+    email: string;
+
+    @IsNotEmpty()
+    @IsDate()
+    registrationDate: Date;
+
+    @IsNotEmpty()
+    @IsNumber()
+    roleId: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    sexoId: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    direccionId: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    administradorId: number;
+}
