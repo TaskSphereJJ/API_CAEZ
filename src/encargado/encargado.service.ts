@@ -18,7 +18,7 @@ export class EncargadoService {
     @InjectRepository(Sexo) private readonly sexoReposiory: Repository<Sexo>,
     @InjectRepository(Direccion) private readonly direccionReposiory: Repository<Direccion>,
     @InjectRepository(TipoDoc) private readonly tipoDocReposiory: Repository<TipoDoc>,
-    @InjectRepository(User) private readonly adminReposiory: Repository<User>,
+    @InjectRepository(User) private readonly adminReposiory: Repository<User>
   ) { }
 
   // Crear encargado
