@@ -65,8 +65,12 @@ export class EnfermedadService {
   }
 
   // Obtener una enfermedad en especifico por su id
-  findOne(id: number) {
-    return `This action returns a #${id} enfermedad`;
+  async findOne(id: number) {
+    try {
+      
+    } catch (error) {
+      
+    }
   }
 
   // Modificar una enfermedad.
