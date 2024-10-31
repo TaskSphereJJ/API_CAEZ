@@ -12,7 +12,7 @@ export class FacturaService {
   constructor(
     @InjectRepository(Factura) private readonly facturaRepository: Repository<Factura>,
     @InjectRepository(Pago) private readonly pagoRepository: Repository<Pago>,
-    @InjectRepository(Alumno) private readonly alumnoRepository: Repository<Alumno>,
+    @InjectRepository(Alumno) private readonly alumnoRepository: Repository<Alumno>
   ) { }
 
   // Crear factura
