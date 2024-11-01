@@ -84,7 +84,7 @@ export class FacturaService {
     return `This action updates a #${id} factura`;
   }
 
-  // Eliminar factura
+  // Eliminar factura 
   remove(id: number) {
     return `This action removes a #${id} factura`;
   }
