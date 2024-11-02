@@ -18,7 +18,7 @@ export class PagoService {
   ){}
 
 
-  // Crear pago
+  // Crear pago 
   async create(createPagoDto: CreatePagoDto) {
     try {
       // Verifico que exista alumno por medio del id
