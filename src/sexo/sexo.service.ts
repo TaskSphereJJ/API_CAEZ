@@ -11,7 +11,7 @@ export class SexoService {
     @InjectRepository(Sexo) private readonly sexoRepository: Repository<Sexo>
   ){}
   
-  // Crear sexo
+  // Crear sexo 
   async create(createSexoDto: CreateSexoDto) {
     try {
       // Creacion de sexo
