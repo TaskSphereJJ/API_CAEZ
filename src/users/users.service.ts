@@ -16,7 +16,7 @@ export class UsersService {
   // Crear user
   async create(createUserDto: CreateUserDto) {
     try {
-      // Busco el rol asociado a usuario
+      // Busco el rol asociado a usuario 
       const role = await this.roleRepository.findOne({
         where: { id: createUserDto.roleId }
       })
