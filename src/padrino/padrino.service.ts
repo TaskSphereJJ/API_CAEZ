@@ -19,7 +19,7 @@ export class PadrinoService {
     @InjectRepository(User)private readonly userRepository: Repository<User>
   ) { }
 
-  // Crear padrino 
+  // Crear padrino  
   async create(createPadrinoDto: CreatePadrinoDto) {
     try {
       // Verifico que exista rol por medio del id
