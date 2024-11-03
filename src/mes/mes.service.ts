@@ -11,7 +11,7 @@ export class MesService {
     @InjectRepository(Mes) private readonly mesReposiory: Repository<Mes>
   ){}
 
-  // Creat Mes 
+  // Creat Mes  
   async create(createMesDto: CreateMesDto) {
     try {
       // Creacion de mes
