@@ -11,7 +11,7 @@ export class RolesService {
     @InjectRepository(Role) private readonly roleRepository: Repository<Role>
   ){}
 
-  // Metodo crear 
+  // Metodo crear  
   async create(createRoleDto: CreateRoleDto) {
 try {
       // Creacion de rol
