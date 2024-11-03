@@ -21,7 +21,7 @@ export class EncargadoService {
     @InjectRepository(User) private readonly adminReposiory: Repository<User>
   ) { }
 
-  // Crear encargado
+  // Crear encargado 
   async create(createEncargadoDto: CreateEncargadoDto) {
     try {
       // Verifico que exista Role por medio del id
