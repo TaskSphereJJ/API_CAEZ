@@ -48,7 +48,7 @@ export class EnfermedadService {
         };
       }
 
-      // En caso de que no se encuentren enfermedades  
+      // En caso de que no se encuentren enfermedades   
       return {
         ok: false,
         message: 'No se encontraron enfermedades',
