@@ -11,7 +11,7 @@ export class ParentezcoService {
     @InjectRepository(Parentezco) private readonly parentezcoRepository: Repository<Parentezco>
   ) { }
 
-  // Crear Parentezco
+  // Crear Parentezco 
   async create(createParentezcoDto: CreateParentezcoDto) {
     try {
       // Creacion de parentezco
