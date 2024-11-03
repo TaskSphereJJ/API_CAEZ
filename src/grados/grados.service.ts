@@ -14,7 +14,7 @@ export class GradosService {
   // Crear grado
   async create(createGradoDto: CreateGradoDto) {
     try {
-      // Creacion de grado 
+      // Creacion de grado  
       const grado = await this.gradoRepository.create(createGradoDto);
       
       // Guardo el grado en la base de datos
