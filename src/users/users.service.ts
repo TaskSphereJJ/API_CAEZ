@@ -13,7 +13,7 @@ export class UsersService {
     @InjectRepository(Role) private readonly roleRepository: Repository<Role>,
   ) { }
 
-  // Crear user
+  // Crear user 
   async create(createUserDto: CreateUserDto) {
     try {
       // Busco el rol asociado a usuario 
