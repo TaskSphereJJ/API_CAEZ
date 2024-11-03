@@ -162,7 +162,7 @@ export class AlumnoService {
     }
   }
 
-  // Obtener todos los alumnos
+  // Obtener todos los alumnos 
   async findAll() {
     try {
       // Verifico si estan activos
