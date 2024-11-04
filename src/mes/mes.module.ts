@@ -8,5 +8,5 @@ import { Mes } from './entities/me.entity';
   imports: [TypeOrmModule.forFeature([Mes])],
   controllers: [MesController],
   providers: [MesService],
-})
+}) 
 export class MesModule {}
