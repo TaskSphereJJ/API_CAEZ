@@ -15,5 +15,5 @@ import { Padrino } from 'src/padrino/entities/padrino.entity';
   imports: [TypeOrmModule.forFeature([Alumno, Sexo, Role, Encargado, Enfermedad, Turno, Admin, Padrino])],
   controllers: [AlumnoController],
   providers: [AlumnoService],
-})
+}) 
 export class AlumnoModule {}
