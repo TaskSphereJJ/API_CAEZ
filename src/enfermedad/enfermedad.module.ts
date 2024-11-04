@@ -8,5 +8,5 @@ import { Enfermedad } from './entities/enfermedad.entity';
   imports: [TypeOrmModule.forFeature([Enfermedad])],
   controllers: [EnfermedadController],
   providers: [EnfermedadService],
-})
+}) 
 export class EnfermedadModule {}
