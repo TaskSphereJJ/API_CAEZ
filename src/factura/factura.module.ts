@@ -10,5 +10,5 @@ import { Alumno } from 'src/alumno/entities/alumno.entity';
   imports: [TypeOrmModule.forFeature([Factura, Pago, Alumno])],
   controllers: [FacturaController],
   providers: [FacturaService],
-})
+}) 
 export class FacturaModule {}
