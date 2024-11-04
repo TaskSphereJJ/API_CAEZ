@@ -5,5 +5,5 @@ import { PadrinoController } from './padrino.controller';
 @Module({
   controllers: [PadrinoController],
   providers: [PadrinoService],
-})
+}) 
 export class PadrinoModule {}
