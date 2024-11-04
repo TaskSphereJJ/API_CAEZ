@@ -11,5 +11,5 @@ import { User } from 'src/users/entities/user.entity';
   imports: [TypeOrmModule.forFeature([Pago, Alumno, TipoPago, User])],
   controllers: [PagoController],
   providers: [PagoService],
-})
+}) 
 export class PagoModule {}
