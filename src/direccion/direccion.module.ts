@@ -8,5 +8,5 @@ import { Direccion } from './entities/direccion.entity';
   imports:[TypeOrmModule.forFeature([Direccion])],
   controllers: [DireccionController],
   providers: [DireccionService],
-})
+}) 
 export class DireccionModule {}
