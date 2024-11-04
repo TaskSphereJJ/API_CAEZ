@@ -8,5 +8,5 @@ import { Parentezco } from './entities/parentezco.entity';
   imports: [TypeOrmModule.forFeature([Parentezco])],
   controllers: [ParentezcoController],
   providers: [ParentezcoService],
-})
+}) 
 export class ParentezcoModule {}
