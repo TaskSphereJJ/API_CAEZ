@@ -192,7 +192,7 @@ export class AlumnoService {
       };
     }
   }
-
+ 
   // Obtener un alumno por id
   findOne(id: number) {
     return `This action returns a #${id} alumno`;
