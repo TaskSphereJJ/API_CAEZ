@@ -12,5 +12,5 @@ import { User } from 'src/users/entities/user.entity';
   imports: [TypeOrmModule.forFeature([Encargado, Role, Direccion, Sexo, User])],
   controllers: [EncargadoController],
   providers: [EncargadoService],
-})
+})  
 export class EncargadoModule {}
