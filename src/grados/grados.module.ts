@@ -8,5 +8,5 @@ import { Grado } from './entities/grado.entity';
   imports: [TypeOrmModule.forFeature([Grado])],
   controllers: [GradosController],
   providers: [GradosService],
-})
+}) 
 export class GradosModule {}
