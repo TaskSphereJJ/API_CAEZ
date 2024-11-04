@@ -8,5 +8,5 @@ import { Turno } from './entities/turno.entity';
   imports: [TypeOrmModule.forFeature([Turno])],
   controllers: [TurnoController],
   providers: [TurnoService],
-})
+}) 
 export class TurnoModule {}
