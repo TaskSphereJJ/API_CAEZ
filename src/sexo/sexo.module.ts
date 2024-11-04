@@ -8,5 +8,5 @@ import { Sexo } from './entities/sexo.entity';
   imports: [TypeOrmModule.forFeature([Sexo])],
   controllers: [SexoController],
   providers: [SexoService],
-})
+}) 
 export class SexoModule {}
