@@ -44,8 +44,40 @@ export class TipoPagoService {
     return `This action returns a #${id} tipoPago`;
   }
 
-  update(id: number, updateTipoPagoDto: UpdateTipoPagoDto) {
-    return `This action updates a #${id} tipoPago`;
+  // Modificar tipo-pago
+  async update(id: number, updateTipoPagoDto: UpdateTipoPagoDto) {
+    try {
+      // Busco tipo pago por id
+      const tipoPago = await this.tipoPagoRepository.findOne({where: {id}});
+
+      // Verifico si tipo pago es null
+      if(!tipoPago){
+        return {
+          ok: false,
+          message: 'Tipo Pago no encontrado',
+          status: 404,
+        };
+      }
+
+      // Actualizo el nombre
+      tipoPago.name = updateTipoPagoDto.name;
+
+      // Guardo el resultado en la base 
+      await this.tipoPagoRepository.save(tipoPago);
+
+      // Mensaje de exito al actualizar
+      return {
+        ok: true,
+        message: 'Tipo Pago actualizado con exito',
+        status: 200,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   remove(id: number) {
