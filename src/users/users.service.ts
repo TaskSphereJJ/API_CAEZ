@@ -123,9 +123,75 @@ export class UsersService {
   // Metodo para modificar usuario
   async update(id: number, updateUserDto: UpdateUserDto) {
     try {
-      
+      // Busco un user por medio del id incluyendo relaciones
+      const user = await this.userRepository.findOne({
+        where: { id },
+        relations: ['roleId']
+      });
+
+      // Verifico si la respuesta es nula
+      if(!user){
+        return {
+          ok: false,
+          message: 'Usuario no encontrado',
+          status: 404,
+        };
+      }
+
+      // Verifico si se proporciona un nuevo rol
+      if(updateUserDto.roleId){
+        // Busco el rol por medio del id
+        const rol = await this.roleRepository.findOne({where: {id: updateUserDto.roleId}});
+
+        // Verifico si rol es nulo 
+        if(!rol){
+          return {
+            ok: false,
+            message: 'Rol no encontrado',
+            status: 404,
+          };
+          
+
+          // Asigno el nuevo rol al usuario
+          user.roleId = rol;
+        }else {
+          user.roleId = user.roleId;
+        }
+
+        // Actualizo los demas campos si se proporcionan si no mantengo el actual
+        user.name = updateUserDto.name || user.name;
+        user.lastName = updateUserDto.lastName || user.lastName;
+        user.email = updateUserDto.email || user.email;
+        // user.password = updateUserDto.password || user.password;
+        user.registrationDate = updateUserDto.registrationDate || user.registrationDate;
+        user.roleId = rol;
+      }
+
+      // Si se proporciona una nueva contraseña, actualizo y la encripto
+    if (updateUserDto.password) {
+      user.password = updateUserDto.password;
+      user.hashPassword();
+    } else {
+      // Si no se proporciona una nueva contraseña, mantengo la actual
+      user.password = user.password;
+    }
+
+    // Guardo el resultado en la base
+    await this.userRepository.save(user);
+
+    // Mensaje de exito al actualizar
+    return {
+      ok: true,
+      message: 'Usuario actualizado con exito',
+      status: 200,
+    };
+
     } catch (error) {
-      
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
     }
   }
 
