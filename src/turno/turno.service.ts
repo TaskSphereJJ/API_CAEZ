@@ -9,7 +9,7 @@ import { Repository } from 'typeorm';
 export class TurnoService {
   constructor(
     @InjectRepository(Turno) private readonly turnoRepository: Repository<Turno>
-  ){}
+  ) { }
 
   // Crear turno  
   async create(createTurnoDto: CreateTurnoDto) {
@@ -43,8 +43,43 @@ export class TurnoService {
     return `This action returns a #${id} turno`;
   }
 
-  update(id: number, updateTurnoDto: UpdateTurnoDto) {
-    return `This action updates a #${id} turno`;
+  // Modificar turno
+  async update(id: number, updateTurnoDto: UpdateTurnoDto) {
+    try {
+      // Busco a un turno por medio del id incluyendo relaciones
+      const turno = await this.turnoRepository.findOne({
+        where: { id }
+      })
+
+      // Verifico si es null
+      if (!turno) {
+        return {
+          ok: false,
+          message: 'Turno no encontrado',
+          status: 404,
+        };
+      }
+
+      // Actualizo el nombre del turno, si se proporciona si no se mantiene el actual
+      turno.name = updateTurnoDto.name || turno.name;
+
+      // Guardo el resultado en la base
+      await this.turnoRepository.save(turno);
+
+      // Mensaje de exito al actualizar
+      return {
+        ok: true,
+        message: 'Turno no encontrado',
+        status: 404,
+      };
+
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   remove(id: number) {
