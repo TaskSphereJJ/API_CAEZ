@@ -1,4 +1,7 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateTurnoDto } from './create-turno.dto';
+import { IsNotEmpty, IsString } from "class-validator";
 
-export class UpdateTurnoDto extends PartialType(CreateTurnoDto) {}
+export class UpdateTurnoDto {
+    @IsNotEmpty()
+    @IsString()
+    name: string;
+}
