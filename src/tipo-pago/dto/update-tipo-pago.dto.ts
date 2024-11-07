@@ -1,4 +1,7 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateTipoPagoDto } from './create-tipo-pago.dto';
+import { IsNotEmpty, IsString } from "class-validator";
 
-export class UpdateTipoPagoDto extends PartialType(CreateTipoPagoDto) {}
+export class UpdateTipoPagoDto {
+    @IsNotEmpty()
+    @IsString()
+    name: string;
+}
