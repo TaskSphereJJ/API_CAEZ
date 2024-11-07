@@ -44,8 +44,40 @@ export class TipoDocService {
     return `This action returns a #${id} tipoDoc`;
   }
 
-  update(id: number, updateTipoDocDto: UpdateTipoDocDto) {
-    return `This action updates a #${id} tipoDoc`;
+  // Modificar tipo doc
+  async update(id: number, updateTipoDocDto: UpdateTipoDocDto) {
+    try {
+      // Busco tipo doc por id
+      const tipoDoc = await this.tipoDocumentoRepository.findOne({where:{ id }});
+
+      // Verifico si la respuesta es null
+      if(!tipoDoc){
+        return {
+          ok: false,
+          message: 'Tipo Documento no encontrado',
+          status: 404,
+        };
+      }
+
+      // Actualizo el nombre
+      tipoDoc.name = updateTipoDocDto.name;
+
+      // Guardo el resultado en la base
+      await this.tipoDocumentoRepository.save(tipoDoc);
+
+      // Mensaje de exito al actualizar
+      return {
+        ok: true,
+        message: 'Tipo Documento actualizado con exito',
+        status: 200,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   remove(id: number) {
