@@ -47,8 +47,39 @@ export class ParentezcoService {
   }
 
   // Modificar perentezco
-  update(id: number, updateParentezcoDto: UpdateParentezcoDto) {
-    return `This action updates a #${id} parentezco`;
+  async update(id: number, updateParentezcoDto: UpdateParentezcoDto) {
+    try {
+      // Busco el parentezco por medio del id
+      const parentezco = await this.parentezcoRepository.findOne({ where: { id } });
+
+      // Verifico si parentezco es null
+      if (!parentezco) {
+        return {
+          ok: false,
+          message: 'Parentezco no encontrado',
+          status: 404,
+        };
+      }
+
+      // Actualizo el name por medio del DTO
+      parentezco.name = updateParentezcoDto.name;
+
+      // Guardo el parentezco en la base
+      await this.parentezcoRepository.save(parentezco);
+
+      // Mensaje de exito al actualizar el parentezco 
+      return {
+        ok: true,
+        message: 'Parentezco actualizado con exito',
+        status: 200,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   // Eliminar parentezco
