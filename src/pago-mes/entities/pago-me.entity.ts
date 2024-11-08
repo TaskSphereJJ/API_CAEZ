@@ -5,7 +5,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 @Entity('pagoMes')
 export class PagoMe {
     @PrimaryGeneratedColumn()
-    Id: number;
+    id: number;
 
     @ManyToOne(() => Pago)
     pagoId: Pago;
