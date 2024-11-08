@@ -9,30 +9,30 @@ import { Repository } from 'typeorm';
 export class RolesService {
   constructor(
     @InjectRepository(Role) private readonly roleRepository: Repository<Role>
-  ){}
+  ) { }
 
   // Metodo crear  
   async create(createRoleDto: CreateRoleDto) {
-try {
+    try {
       // Creacion de rol
       const role = await this.roleRepository.create(createRoleDto)
-  
+
       // Lo guardo en la base de datos
       await this.roleRepository.save(role)
-  
+
       // Mensaje de exito al crear el rol
       return {
         ok: true,
         message: 'Rol creado con exito',
         status: 201
       }
-} catch (error) {
-  return {
-    ok: false,
-    message: error.messagem,
-    status: 500,
-  };
-}
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.messagem,
+        status: 500,
+      };
+    }
   }
 
   // Obtener todos los roles
@@ -58,14 +58,46 @@ try {
       };
     }
 
-    }
+  }
 
   findOne(id: number) {
     return `This action returns a #${id} role`;
   }
 
-  update(id: number, updateRoleDto: UpdateRoleDto) {
-    return `This action updates a #${id} role`;
+  // Actualizar role
+  async update(id: number, updateRoleDto: UpdateRoleDto) {
+    try {
+      // Busco el rol por medio del id
+      const rol = await this.roleRepository.findOne({ where: { id } });
+
+      // Verifico si rol es null
+      if (!rol) {
+        return {
+          ok: false,
+          message: 'Rol no encotrado',
+          status: 404,
+        };
+      }
+
+      // Actualizo el name
+      rol.name = updateRoleDto.name;
+
+      // Guardo el resultado en la base
+      await this.roleRepository.save(rol);
+
+      // Mensaje de exito al actualizar el rol
+      return {
+        ok: true,
+        message: 'Rol actualizado con exito',
+        status: 200,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   remove(id: number) {
