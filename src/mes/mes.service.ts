@@ -46,8 +46,39 @@ export class MesService {
   }
 
   // Modificar un mes.
-  update(id: number, updateMeDto: UpdateMeDto) {
-    return `This action updates a #${id} me`;
+  async update(id: number, updateMeDto: UpdateMeDto) {
+    try {
+      // Busco un  por mes su id
+      const mes = await this.mesReposiory.findOne({where: { id }})
+
+      // Verifico si la respuesta es null
+      if(!mes){
+        return {
+          ok: false,
+          message: 'Mes no encontrado',
+          status: 404,
+        };
+      }
+
+      // Actualizo el name
+      mes.name = updateMeDto.name;
+
+      // Guardo el resultado en la base
+      await this.mesReposiory.save(mes);
+
+      // Mensjae de exito al actualizar
+      return {
+        ok: true,
+        message: 'Mes actualizado con exito',
+        status: 200,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   // Eliminar un mes.
