@@ -9,8 +9,8 @@ import { Repository } from 'typeorm';
 export class SexoService {
   constructor(
     @InjectRepository(Sexo) private readonly sexoRepository: Repository<Sexo>
-  ){}
-  
+  ) { }
+
   // Crear sexo  
   async create(createSexoDto: CreateSexoDto) {
     try {
@@ -44,8 +44,40 @@ export class SexoService {
     return `This action returns a #${id} sexo`;
   }
 
-  update(id: number, updateSexoDto: UpdateSexoDto) {
-    return `This action updates a #${id} sexo`;
+  // Modificar sexo
+  async update(id: number, updateSexoDto: UpdateSexoDto) {
+    try {
+      // Busco el sexo por medio del id
+      const sexo = await this.sexoRepository.findOne({ where: { id } });
+
+      // Verifico si la respuesta es nula
+      if (!sexo) {
+        return {
+          ok: false,
+          message: 'Sexo no encontrado',
+          status: 404,
+        };
+      }
+
+      // Acualizo el nombre
+      sexo.name = updateSexoDto.name;
+
+      // Guardo el resultado en la base
+      await this.sexoRepository.save(sexo);
+
+      // Mensaje de exito al actualizar sexo
+      return {
+        ok: true,
+        message: 'Sexo actualizado con exito',
+        status: 200,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   remove(id: number) {
