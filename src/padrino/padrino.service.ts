@@ -111,8 +111,132 @@ export class PadrinoService {
   }
 
   // Modificar un padrino
-  update(id: number, updatePadrinoDto: UpdatePadrinoDto) {
-    return `This action updates a #${id} padrino`;
+  async update(id: number, updatePadrinoDto: UpdatePadrinoDto) {
+    try {
+      // Buscar padrino por medio de su id incluyendo relaciones
+      const padrino = await this.padrinoRepository.findOne({
+        where: { id },
+        relations: ['roleId', 'sexoId', 'direccionId', 'administradorId'],
+      });
+
+      // Verifico si padrino es null
+      if(!padrino){
+        return {
+          ok: false,
+          message: 'Padrino no encontrado',
+          status: 404,
+        };
+      }
+
+      // Verifico si se proporciona un nuevo rol
+      if(updatePadrinoDto.roleId){
+        // Busco el rol por id
+        const rol = await this.roleRepository.findOne({where: { id }});
+
+        // Verifico si la respuesta es null
+        if(!rol){
+          return {
+            ok: false,
+            message: 'Rol no encontrado',
+            status:404,
+          };
+        }
+
+        // ????????????????????????????
+        // Asigno el nuevo rol a padrino
+        padrino.role = rol;
+      } else {
+        // Si no se proporciona un nuevo rol mantengo el actual
+        padrino.role = padrino.role;
+      }
+
+      // Verifico si se proporciona un nuevo sexo
+      if(updatePadrinoDto.sexoId) {
+        // Busco sexo por id
+        const sex = await this.sexoRepository.findOne({where: { id:updatePadrinoDto.sexoId}});
+
+        // Verifico si sexo es nulo
+        if(!sex){
+          return {
+            ok: false,
+            message: 'Sexo no encontrado',
+            status: 404,
+          };
+        }
+
+        // Asigno el nuevo sexo a padrino
+        padrino.sexo = sex;
+      } else {
+        // Si no se proporciona un nuevo sexo mantengo el actual
+        padrino.sexo = padrino.sexo;
+      }
+
+      // Verifico si se proporciona una nueva direccion 
+      if(updatePadrinoDto.direccionId){
+        // Busco la direccion por su id
+        const direccion = await this.direccionRepository.findOne({where: {id: updatePadrinoDto.direccionId}});
+
+        // Verifico si direccion es nula
+        if(!direccion) {
+          return {
+            ok: false,
+            message: 'Dirección no encontrada',
+            status: 404,
+          };
+        }
+
+        // Asigno la nueva direccion a padrino
+        padrino.direccion = direccion;
+      } else {
+        // Si no se proporciona una nueva direccion mantengo la actual
+        padrino.direccion = padrino.direccion;
+      }
+
+      // Verifico si se proporciona un nuevo administrador
+      if(updatePadrinoDto.administradorId) {
+        // Busco a usuario admin por id
+        const admin = await this.userRepository.findOne({where: {id: updatePadrinoDto.administradorId}});
+
+        // Verifico que user admin no sea null
+        if(!admin) {
+          return {
+            ok: false,
+            messsage: 'Administrador no encontrado',
+            status: 404,
+          };
+        }
+
+        // Asigno el nuevo admin a padrino
+        padrino.administrador = admin;
+      } else {
+        // Si no se proporciona un nuevo admin mantengo el actual
+        padrino.administrador = padrino.administrador;
+      }
+
+      // Actualizo los demas campos si se proporcionan si no mantengo el actual
+      padrino.name = updatePadrinoDto.name || padrino.name;
+      padrino.lastName = updatePadrinoDto.lastName || padrino.lastName;
+      padrino.phone = updatePadrinoDto.phone || padrino.phone;
+      padrino.email = updatePadrinoDto.email || padrino.email;
+      padrino.registrationDate = updatePadrinoDto.registrationDate || padrino.registrationDate;
+
+      // Guardo los nuevos datos en la base
+      await this.padrinoRepository.save(padrino);
+
+      // Mensaje de exito al guardar
+      return {
+        ok: true,
+        message: 'Padrino actualizado con exito',
+        status: 200,
+      };
+
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   // Eliminar un padrino
