@@ -47,8 +47,42 @@ try {
   }
 
   // Modificar info-financiera por su id.
-  update(id: number, updateInformacionFinancieraDto: UpdateInformacionFinancieraDto) {
-    return `This action updates a #${id} informacionFinanciera`;
+  async update(id: number, updateInformacionFinancieraDto: UpdateInformacionFinancieraDto) {
+    try {
+      // Busco IF por su id
+      const infoFinanciera = await this.infoFinancieraRepository.findOne({ where: { id }});
+
+      // Verifico si la respuesta es nula
+      if(!infoFinanciera){
+        return {
+          ok: false,
+          message: 'Información financiera no encontrada',
+          status: 404,
+        };
+      }
+
+      // Actualizo los datos si se proporcionan si no mantengo el actual
+      infoFinanciera.fondoActual = updateInformacionFinancieraDto.fondoActual || infoFinanciera.fondoActual;
+      infoFinanciera.deudaTotal = updateInformacionFinancieraDto.deudaTotal || infoFinanciera.deudaTotal;
+      infoFinanciera.salgoPorCompletar = updateInformacionFinancieraDto.salgoPorCompletar || infoFinanciera.salgoPorCompletar;
+      infoFinanciera.numStudent = updateInformacionFinancieraDto.numStudent || infoFinanciera.numStudent;
+
+      // Guardo el resultado en la base
+      await this.infoFinancieraRepository.save(infoFinanciera);
+
+      // Mensaje de exito al actualizar 
+      return {
+        ok: true,
+        message: 'Información financiera actualizada con exito',
+        status: 200,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   // Eliminar una info
