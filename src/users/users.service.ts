@@ -97,12 +97,12 @@ export class UsersService {
   async findOne(id: number) {
     try {
       // Busco al usuario por medio del id
-      const user = await this.userRepository.findOne({where: { id }});
+      const user = await this.userRepository.findOne({ where: { id } });
 
       // Verifico si user es diferente a null
-      if(!user){
+      if (!user) {
         // Mensaje de error de que no se encontro el usuario con estado 404
-        return {ok: false, message: 'No se encontro el usuario', status: 404}
+        return { ok: false, message: 'No se encontro el usuario', status: 404 }
       }
 
       // Si se el usuario si se encontro devolver el usuario con estado 200
@@ -130,7 +130,7 @@ export class UsersService {
       });
 
       // Verifico si la respuesta es nula
-      if(!user){
+      if (!user) {
         return {
           ok: false,
           message: 'Usuario no encontrado',
@@ -139,52 +139,53 @@ export class UsersService {
       }
 
       // Verifico si se proporciona un nuevo rol
-      if(updateUserDto.roleId){
+      if (updateUserDto.roleId) {
         // Busco el rol por medio del id
-        const rol = await this.roleRepository.findOne({where: {id: updateUserDto.roleId}});
+        const rol = await this.roleRepository.findOne({ where: { id: updateUserDto.roleId } });
 
         // Verifico si rol es nulo 
-        if(!rol){
+        if (!rol) {
           return {
             ok: false,
             message: 'Rol no encontrado',
             status: 404,
           };
-          
-
-          // Asigno el nuevo rol al usuario
-          user.roleId = rol;
-        }else {
-          user.roleId = user.roleId;
         }
 
-        // Actualizo los demas campos si se proporcionan si no mantengo el actual
-        user.name = updateUserDto.name || user.name;
-        user.lastName = updateUserDto.lastName || user.lastName;
-        user.email = updateUserDto.email || user.email;
-        // user.password = updateUserDto.password || user.password;
-        user.registrationDate = updateUserDto.registrationDate || user.registrationDate;
+        // Asigno el nuevo rol al usuario
         user.roleId = rol;
+      } else {
+        // Si no se proporciona un nuevo rol mantengo el actual
+        user.roleId = user.roleId;
       }
 
-      // Si se proporciona una nueva contraseña, actualizo y la encripto
-    if (updateUserDto.password) {
-      user.password = updateUserDto.password;
-      user.hashPassword();
-    } else {
-      // Si no se proporciona una nueva contraseña, mantengo la actual
-      user.password = user.password;
-    }
+      // Actualizo los demas campos si se proporcionan si no mantengo el actual
+      user.name = updateUserDto.name || user.name;
+      user.lastName = updateUserDto.lastName || user.lastName;
+      user.email = updateUserDto.email || user.email;
+      // user.password = updateUserDto.password || user.password;
+      user.registrationDate = updateUserDto.registrationDate || user.registrationDate;
+      // user.roleId = rol;
 
-    // Guardo el resultado en la base
-    await this.userRepository.save(user);
 
-    // Mensaje de exito al actualizar
-    return {
-      ok: true,
-      message: 'Usuario actualizado con exito',
-      status: 200,
-    };
+      // Si se proporciona una nueva contraseña, la actualizo y la encripto
+      if (updateUserDto.password) {
+        user.password = updateUserDto.password;
+        user.hashPassword();
+      } else {
+        // Si no se proporciona una nueva contraseña, mantengo la actual
+        user.password = user.password;
+      }
+
+      // Guardo el resultado en la base
+      await this.userRepository.save(user);
+
+      // Mensaje de exito al actualizar
+      return {
+        ok: true,
+        message: 'Usuario actualizado con exito',
+        status: 200,
+      };
 
     } catch (error) {
       return {
@@ -198,9 +199,9 @@ export class UsersService {
   // Metodo para eliminar un user
   async remove(id: number) {
     try {
-      
+
     } catch (error) {
-      
+
     }
   }
 }
