@@ -11,7 +11,7 @@ import { Mes } from 'src/mes/entities/me.entity';
 export class PagoMesService {
  constructor(
   @InjectRepository(PagoMe)private readonly pagoMesRepository: Repository<PagoMe>,
-  @InjectRepository(Pago)private readonly pagosRepository: Repository<Pago>,
+  @InjectRepository(Pago)private readonly pagoRepository: Repository<Pago>,
   @InjectRepository(Mes)private readonly mesRepository: Repository<Mes>
  ){}
 
@@ -20,8 +20,8 @@ export class PagoMesService {
     try {
       // Verifico que exista pago por medio del id
       // porque no funciona el id??
-      const pago = await this.pagosRepository.findOne({
-        where: {Id: createPagoMeDto.pagoId}
+      const pago = await this.pagoRepository.findOne({
+        where: {id: createPagoMeDto.pagoId}
       });
 
       // Verifico que la respuesta no sea nula
@@ -53,7 +53,7 @@ export class PagoMesService {
       pagoMes.mesId = mes;
 
       // Guardo los datos en la base
-      await this.pagosRepository.save(pagoMes);
+      await this.pagoRepository.save(pagoMes);
        
       // Mensaje de exito al crear un pago mes
       return {
@@ -79,9 +79,71 @@ export class PagoMesService {
     return `This action returns a #${id} pagoMe`;
   }
 
-  update(id: number, updatePagoMeDto: UpdatePagoMeDto) {
-    return `This action updates a #${id} pagoMe`;
+  async update(id: number, updatePagoMeDto: UpdatePagoMeDto) {
+    try {
+      // Busca `PagoMe` incluyendo las relaciones definidas con `pago` y `mes`
+      const pagoMes = await this.pagoMesRepository.findOne({
+        where: { id },
+        relations: ['pagoId', 'mesId']
+      });
+  
+      // Verifica si el resultado es nulo
+      if (!pagoMes) {
+        return {
+          ok: false,
+          message: 'Pago mes no encontrado',
+          status: 404,
+        };
+      }
+  
+      // Verificar si se proporciona un `pagoId` en el DTO
+      if (updatePagoMeDto.pagoId) {
+        const newPago = await this.pagoRepository.findOne({ where: { id: updatePagoMeDto.pagoId } });
+        if (!newPago) {
+          return {
+            ok: false,
+            message: 'Pago no encontrado',
+            status: 404,
+          };
+        }
+        pagoMes.pagoId = newPago; // Asigna la nueva relación
+      } else {
+        // Si no se proporciona un nuevo pago mantengo el actual
+        pagoMes.pagoId = pagoMes.pagoId;
+      }
+  
+      // Verificar si se proporciona un `mesId` en el DTO
+      if (updatePagoMeDto.mesId) {
+        const mes = await this.mesRepository.findOne({ where: { id: updatePagoMeDto.mesId } });
+        if (!mes) {
+          return {
+            ok: false,
+            message: 'Mes no encontrado',
+            status: 404,
+          };
+        }
+        pagoMes.mesId = mes; // Asigna la nueva relación
+      } else {
+        pagoMes.mesId = pagoMes.mesId;
+      }
+  
+      // Guarda los cambios en la base de datos
+      await this.pagoMesRepository.save(pagoMes);
+  
+      return {
+        ok: true,
+        message: 'Pago mes actualizado con éxito',
+        status: 200,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
+  
 
   remove(id: number) {
     return `This action removes a #${id} pagoMe`;
