@@ -212,7 +212,7 @@ export class PagoService {
     }
   }
 
-  // Elimnar un pago.
+  // Elimnar un pago. 
   remove(id: number) {
     return `This action removes a #${id} pago`;
   }
