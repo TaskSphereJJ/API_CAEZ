@@ -96,7 +96,7 @@ export class PagoMesService {
         };
       }
   
-      // Verificar si se proporciona un `pagoId` en el DTO
+      // Verificar si se proporciona un pago por medio del DTO
       if (updatePagoMeDto.pagoId) {
         const newPago = await this.pagoRepository.findOne({ where: { id: updatePagoMeDto.pagoId } });
         if (!newPago) {
@@ -106,7 +106,7 @@ export class PagoMesService {
             status: 404,
           };
         }
-        pagoMes.pagoId = newPago; // Asigna la nueva relación
+        pagoMes.pagoId = newPago;
       } else {
         // Si no se proporciona un nuevo pago mantengo el actual
         pagoMes.pagoId = pagoMes.pagoId;
