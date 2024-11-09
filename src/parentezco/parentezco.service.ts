@@ -60,7 +60,7 @@ export class ParentezcoService {
           status: 404,
         };
       }
-
+ 
       // Actualizo el name por medio del DTO
       parentezco.name = updateParentezcoDto.name;
 
