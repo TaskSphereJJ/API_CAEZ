@@ -20,7 +20,7 @@ export class FacturaService {
     try {
       // Verifico que exista pago por medio del Id
       const pago = await this.pagoRepository.findOne({
-        where: {Id: createFacturaDto.pagoId }
+        where: { id: createFacturaDto.pagoId }
       });
 
       // Verifico si la respuesta es nula
@@ -80,8 +80,84 @@ export class FacturaService {
   }
 
   // Modificar factura. 
-  update(id: number, updateFacturaDto: UpdateFacturaDto) {
-    return `This action updates a #${id} factura`;
+  async update(id: number, updateFacturaDto: UpdateFacturaDto) {
+    try {
+      // Busco una factura por su id incluyendo relaciones
+      const factura = await this.facturaRepository.findOne({
+        where: { id },
+        relations: ['pagoId', 'alumnoId'],
+      });
+
+      // Verifico si factura es null
+      if (!factura) {
+        return {
+          ok: false,
+          message: 'Factura no encontrada',
+          status: 404,
+        };
+      }
+
+      // Verifico si se proporciona un nuevo pago 
+      if (updateFacturaDto.pagoId) {
+        // Busco un pago por su id
+        const pago = await this.pagoRepository.findOne({ where: { id: updateFacturaDto.pagoId } });
+
+        // Verifico si pago es null
+        if (!pago) {
+          return {
+            ok: false,
+            message: 'Pago no encontrado',
+            status: 404,
+          };
+        }
+
+        // Asigno el nuevo pago a factura
+        factura.pagoId = pago;
+      } else {
+        // Si no se proporciona un nuevo pago mantengo el actual
+        factura.pagoId = factura.pagoId;
+      }
+
+      // Verfico si se proporciona un nuevo alumno
+      if (updateFacturaDto.alumnoId) {
+        // Busco un alumno por su id
+        const alumno = await this.alumnoRepository.findOne({ where: { id: updateFacturaDto.alumnoId } });
+
+        // Verifico si alumno es null
+        if (!alumno) {
+          return {
+            ok: false,
+            message: 'Alumno no encotrado',
+            status: 404,
+          };
+        }
+
+        // Asigno el nuevo alumno a factura
+        factura.alumnoId = alumno;
+      } else {
+        // Si no se proporciona un nuevo alumno mantengo el actual
+        factura.alumnoId = factura.alumnoId;
+      }
+
+      // Actualizo los demas campos si se proporcionan si no mantengo el actual
+      factura.pdfRoute = updateFacturaDto.pdfRoute || factura.pdfRoute;
+
+      // Guardo los datos en la base
+      await this.facturaRepository.save(factura);
+
+      // Mensaje de exito al actualizar factura
+      return {
+        ok: true,
+        message: 'Factura actualizada con exito',
+        status: 200,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   // Eliminar factura 
