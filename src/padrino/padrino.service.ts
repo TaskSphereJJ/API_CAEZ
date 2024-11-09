@@ -164,7 +164,7 @@ export class PadrinoService {
           };
         }
 
-        // Asigno el nuevo sexo a padrino
+        // Asigno el nuevo sexo a padrino 
         padrino.sexo = sex;
       } else {
         // Si no se proporciona un nuevo sexo mantengo el actual
