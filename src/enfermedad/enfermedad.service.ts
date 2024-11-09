@@ -9,7 +9,7 @@ import { Repository } from 'typeorm';
 export class EnfermedadService {
   constructor(
     @InjectRepository(Enfermedad) private readonly enfermedadRepository: Repository<Enfermedad>
-  ){}
+  ) { }
 
   // Crear enfermedad
   async create(createEnfermedadDto: CreateEnfermedadDto) {
@@ -20,14 +20,14 @@ export class EnfermedadService {
       // Guardo la enfermedad en la base de datos
       await this.enfermedadRepository.save(enfermedad)
 
-       // Mensaje de exito al crear enfermedad con estado 201
-       return {
+      // Mensaje de exito al crear enfermedad con estado 201
+      return {
         ok: true,
         message: 'Enfermedad creada con exito',
         status: 201,
-       };
+      };
     } catch (error) {
-      
+
     }
   }
 
@@ -36,11 +36,11 @@ export class EnfermedadService {
     try {
       // Verifico si estan activas
       const enfermedad = await this.enfermedadRepository.find({
-        where: {isActive: true}
+        where: { isActive: true }
       });
 
       // Verifico si la longitud es mayor a 0
-      if(enfermedad.length > 0) {
+      if (enfermedad.length > 0) {
         return {
           ok: true,
           enfermedad,
@@ -67,15 +67,48 @@ export class EnfermedadService {
   // Obtener una enfermedad en especifico por su id
   async findOne(id: number) {
     try {
-      
+
     } catch (error) {
-      
+
     }
   }
 
   // Modificar una enfermedad.
-  update(id: number, updateEnfermedadDto: UpdateEnfermedadDto) {
-    return `This action updates a #${id} enfermedad`;
+  async update(id: number, updateEnfermedadDto: UpdateEnfermedadDto) {
+    try {
+      // Busco una enfermedad por su id
+      const enfermedad = await this.enfermedadRepository.findOne({ where: { id } });
+
+      // Verifico si es null
+      if (!enfermedad) {
+        return {
+          ok: false,
+          message: 'Enfermedad no encontrada',
+          status: 404,
+        };
+      }
+
+      // Actualizo los datos si se proporcionan si no mantengo el actual
+      enfermedad.name = updateEnfermedadDto.name || enfermedad.name;
+      enfermedad.descripcion = updateEnfermedadDto.descripcion || enfermedad.descripcion;
+
+      // Guardo el resultado en la base
+      await this.enfermedadRepository.save(enfermedad);
+
+      // Mensaje de exito al actualizar
+      return {
+        ok: true,
+        message: 'Enfermedad actualizada con exito',
+        status: 200,
+      };
+
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   // Metodo para eliminar una enfermedad
