@@ -80,7 +80,7 @@ export class SexoService {
     }
   }
 
-  remove(id: number) {
+  remove(id: number) { 
     return `This action removes a #${id} sexo`;
   }
 }
