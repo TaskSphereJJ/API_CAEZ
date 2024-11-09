@@ -47,8 +47,39 @@ export class GradosService {
   }
 
   // Modificar grado
-  update(id: number, updateGradoDto: UpdateGradoDto) {
-    return `This action updates a #${id} grado`;
+  async update(id: number, updateGradoDto: UpdateGradoDto) {
+    try {
+      // Busco un grado por su id
+      const grado = await this.gradoRepository.findOne({where: { id }});
+
+      // Verifico si grado es nulo
+      if(!grado){
+        return {
+          ok: false,
+          message: 'Grado no encontrado',
+          status: 404,
+        };
+      }
+
+      // Actualizo el name
+      grado.name = updateGradoDto.name;
+
+      // Lo guardo en la base
+      await this.gradoRepository.save(grado);
+
+      // Mensaje de exito al actualizar
+      return {
+        ok: true,
+        message: 'Grado actualizado con exito',
+        status: 200,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   // Eliminar grado.
