@@ -59,7 +59,7 @@ export class TurnoService {
           status: 404,
         };
       }
-
+ 
       // Actualizo el nombre del turno, si se proporciona si no se mantiene el actual
       turno.name = updateTurnoDto.name || turno.name;
 
