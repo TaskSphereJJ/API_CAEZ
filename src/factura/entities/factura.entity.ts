@@ -1,15 +1,17 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Alumno } from "src/alumno/entities/alumno.entity";
+import { Pago } from "src/pago/entities/pago.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('factura')
 export class Factura {
     @PrimaryGeneratedColumn()
-    Id: number;
+    id: number;
 
-    @Column()
-    pagoId: number;
+    @ManyToOne(() => Pago)
+    pagoId: Pago;
 
-    @Column()
-    alumnoId: number;
+    @ManyToOne(() => Alumno)
+    alumnoId: Alumno;
 
     @Column()
     pdfRoute: string;
