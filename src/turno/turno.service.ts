@@ -51,7 +51,7 @@ export class TurnoService {
         where: { id }
       })
 
-      // Verifico si es null
+      // Verifico si es null 
       if (!turno) {
         return {
           ok: false,
