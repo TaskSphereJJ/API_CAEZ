@@ -46,7 +46,7 @@ export class ParentezcoService {
     return `This action returns a #${id} parentezco`;
   }
 
-  // Modificar perentezco
+  // Modificar perentezco 
   async update(id: number, updateParentezcoDto: UpdateParentezcoDto) {
     try {
       // Busco el parentezco por medio del id
