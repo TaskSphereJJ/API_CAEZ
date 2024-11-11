@@ -64,7 +64,7 @@ export class RolesService {
     return `This action returns a #${id} role`;
   }
 
-  // Actualizar role
+  // Actualizar role 
   async update(id: number, updateRoleDto: UpdateRoleDto) {
     try {
       // Busco el rol por medio del id
