@@ -6,7 +6,7 @@ export class Sexo {
     id: number;
 
     @Column()
-    name: string;
+    name: string; 
 
     @Column({ default: true})
     isActive: boolean;
