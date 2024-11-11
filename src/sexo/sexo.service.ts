@@ -35,7 +35,7 @@ export class SexoService {
     }
   }
 
-  // Obtener todos los sexos XD
+  // Obtener todos los sexos 
   findAll() {
     return `This action returns all sexo`;
   }
