@@ -185,7 +185,7 @@ export class PagoService {
         pago.adminId = pago.adminId;
       }
 
-      // Actualizo los demas datos si se proporcionan si no mantengo el actual 
+      // Actualizo los demas datos si se proporcionan si no mantengo el actual  
       pago.multa = updatePagoDto.multa || pago.multa;
       pago.discount = updatePagoDto.discount || pago.discount;
       pago.price = updatePagoDto.price || pago.price;
