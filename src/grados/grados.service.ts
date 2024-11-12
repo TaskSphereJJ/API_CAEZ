@@ -52,7 +52,7 @@ export class GradosService {
       // Busco un grado por su id
       const grado = await this.gradoRepository.findOne({where: { id }});
 
-      // Verifico si grado es nulo
+      // Verifico si grado es nulo 
       if(!grado){
         return {
           ok: false,
