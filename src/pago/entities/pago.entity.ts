@@ -27,7 +27,7 @@ export class Pago {
     totalPagado: number;
 
     @Column({type: 'date'})
-    registrationDate: Date;
+    registrationDate: Date; 
 
     @ManyToOne(() => User)
     adminId: User;
