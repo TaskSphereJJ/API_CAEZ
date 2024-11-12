@@ -15,7 +15,7 @@ export class UpdatePagoDto {
 
     @IsNotEmpty()
     @IsNumber()
-    discount: number;
+    discount: number; 
 
     @IsNotEmpty()
     @IsNumber()
