@@ -11,5 +11,5 @@ export class CreateFacturaDto {
 
     @IsNotEmpty()
     @IsString()
-    pdfRoute: string;
+    pdfRoute: string; 
 }
