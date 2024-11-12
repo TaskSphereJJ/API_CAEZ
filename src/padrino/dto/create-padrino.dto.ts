@@ -18,7 +18,7 @@ export class CreatePadrinoDto {
 
     @IsNotEmpty()
     @IsDate()
-    registrationDate: Date;
+    registrationDate: Date; 
 
     @IsNotEmpty()
     @IsNumber()
