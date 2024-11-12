@@ -7,5 +7,5 @@ export class UpdateEnfermedadDto {
 
     @IsNotEmpty()
     @IsString()
-    descripcion: string;
+    descripcion: string; 
 }
