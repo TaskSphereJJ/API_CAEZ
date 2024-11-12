@@ -19,7 +19,7 @@ export class EncargadoService {
     @InjectRepository(Direccion) private readonly direccionReposiory: Repository<Direccion>,
     @InjectRepository(TipoDoc) private readonly tipoDocReposiory: Repository<TipoDoc>,
     @InjectRepository(User) private readonly adminReposiory: Repository<User>
-  ) { } 
+  ) { }
 
   // Crear encargado 
   async create(createEncargadoDto: CreateEncargadoDto) {
@@ -170,8 +170,144 @@ export class EncargadoService {
   }
 
   // Modificar un encargado.
-  update(id: number, updateEncargadoDto: UpdateEncargadoDto) {
-    return `This action updates a #${id} encargado`;
+  async update(id: number, updateEncargadoDto: UpdateEncargadoDto) {
+    try {
+      // Busco un encargado por su id incluyendo ralciones
+      const encargado = await this.encargadoReposiory.findOne({
+        where: { id },
+        relations: ['roleId', 'sexoId', 'direccionId', 'administradorId'],
+      });
+
+      // Verifico si encargado es null 
+      if (!encargado) {
+        return {
+          ok: false,
+          message: 'Encargado no encontrado',
+          status: 404,
+        };
+      }
+
+      // Verifico si se proporciona un nuevo rol
+      if (updateEncargadoDto.roleId) {
+        // Busco un rol por su id
+        const role = await this.roleReposiory.findOne({ where: { id: updateEncargadoDto.roleId } });
+
+        // Verifico si rol es null
+        if (!role) {
+          return {
+            ok: false,
+            message: 'Rol no encontrado',
+            status: 404,
+          };
+        }
+
+        // Asigno el nuevo rol a encargado
+        encargado.roleId = role;
+      } else {
+        // Si no se proporciona un nuevo rol mantengo el actual
+        encargado.roleId = encargado.roleId;
+      }
+
+      // Verifico si se proporciona un nuevo sexo.
+      if (updateEncargadoDto.sexoId) {
+        // Busco un sexo por su id
+        const sexo = await this.sexoReposiory.findOne({ where: { id: updateEncargadoDto.sexoId } });
+
+        // Verifico si sexo es nulo
+        if (!sexo) {
+          return {
+            ok: false,
+            message: 'Sexo no encontrado',
+            status: 404,
+          };
+        }
+
+        // Asigno el nuevo sexo a encargado
+        encargado.sexoId = sexo;
+      } else {
+        // Si no se proporciona un nuevo sexo manengo el actual
+        encargado.sexoId = encargado.sexoId;
+      }
+
+      // Verifico si se proporciona una nueva direccion.
+      if (updateEncargadoDto.direccionId) {
+        // Busco una direccion por medio de su id
+        const direccion = await this.direccionReposiory.findOne({ where: { id: updateEncargadoDto.direccionId } });
+
+        // Verifico si dirección es null
+        if (!direccion) {
+          return {
+            ok: false,
+            message: 'Dirección no encontrada',
+            status: 404,
+          };
+        }
+
+        // Asigno la nueva dirección a encargado
+        encargado.direccionId = direccion;
+      } else {
+        // Si no se proporciona una nueva dirección mantengo la actual
+        encargado.direccionId = encargado.direccionId;
+      }
+
+      // Verifico si se proporciona un nuevo usuario admin.
+      if (updateEncargadoDto.administratorId) {
+        // Busco un usuario admin por medio del dto
+        const admin = await this.adminReposiory.findOne({ where: { id: updateEncargadoDto.administratorId } });
+
+        // Verifico si admin es nulo
+        if (!admin) {
+          return {
+            ok: false,
+            message: 'Admin no encotrado',
+            satus: 404,
+          };
+        }
+
+        // Asigno el nuevo admin a encargado
+        encargado.administratorId = admin;
+      } else {
+        // Si no se proporciona un  nuevo admin mantengo el actual
+        encargado.administratorId = encargado.administratorId;
+      }
+
+      // Actualizo los demas datos si se proporcionan si no mantengo el actual
+      encargado.name = updateEncargadoDto.name || encargado.name;
+      encargado.lastName = updateEncargadoDto.lastName || encargado.lastName;
+      encargado.email = updateEncargadoDto.email || encargado.email;
+      encargado.registrationDate = updateEncargadoDto.registrationDate || encargado.registrationDate;
+      encargado.phone = updateEncargadoDto.phone || encargado.phone;
+      encargado.emergencyPhone = updateEncargadoDto.emergencyPhone || encargado.emergencyPhone;
+      encargado.documentNumber = updateEncargadoDto.documentNumber || encargado.documentNumber;
+
+      // Verifico si se proporciona una nueva contraseña y  la encripto
+      if(updateEncargadoDto.password){
+        encargado.password = updateEncargadoDto.password;
+
+        // Encripto la nueva contraseña
+        encargado.hashPassword;
+      } else {
+        // Si no se proporciona una nueva contraseña mantengo la actual
+        encargado.password = encargado.password;
+      }
+
+      // Guardo los cambios en la base de datos
+      await this.encargadoReposiory.save(encargado);
+
+      // Mensaje de exito al actualizar encargado
+      return {
+        ok: false,
+        message: 'Encargado actualizado con exito',
+        status: 200,
+      };
+
+    } catch (error) {
+      return {
+        ok: false,
+        message: error.message,
+        status: 500,
+      };
+    }
   }
 
   // Eliminar un encargado
