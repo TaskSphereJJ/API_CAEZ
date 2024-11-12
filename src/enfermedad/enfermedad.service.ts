@@ -95,7 +95,7 @@ export class EnfermedadService {
       // Guardo el resultado en la base
       await this.enfermedadRepository.save(enfermedad);
 
-      // Mensaje de exito al actualizar
+      // Mensaje de exito al actualizar 
       return {
         ok: true,
         message: 'Enfermedad actualizada con exito',
