@@ -11,7 +11,7 @@ export class Factura {
     pagoId: Pago;
 
     @ManyToOne(() => Alumno)
-    alumnoId: Alumno;
+    alumnoId: Alumno; 
 
     @Column()
     pdfRoute: string;
