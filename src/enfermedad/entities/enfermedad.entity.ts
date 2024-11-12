@@ -9,7 +9,7 @@ export class Enfermedad {
     name: string;
 
     @Column()
-    descripcion: string;
+    descripcion: string; 
 
     @Column({ default: true})
     isActive: boolean;
