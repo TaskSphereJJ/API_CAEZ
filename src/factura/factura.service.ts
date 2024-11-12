@@ -74,7 +74,7 @@ export class FacturaService {
     return `This action returns all factura`;
   }
 
-  // Buscar una factura por su id 
+  // Buscar una factura por su id  
   findOne(id: number) {
     return `This action returns a #${id} factura`;
   }
