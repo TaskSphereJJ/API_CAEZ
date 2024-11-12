@@ -7,6 +7,6 @@ export class CreateEnfermedadDto {
 
     @IsNotEmpty()
     @IsString()
-    descripcion: string;
+    descripcion: string; 
 
 }
