@@ -22,7 +22,7 @@ export class Padrino {
     email: string;
 
     @Column()
-    registrationDate: Date;
+    registrationDate: Date; 
 
     @ManyToOne(() => Role)
     role: Role;
